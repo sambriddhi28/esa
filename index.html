@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extended Stay America Cincinnati - Guest Welcome Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f2f5 0%, #ffffff 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #639922 0%, #4a7b15 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo img {
+            height: 65px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .header-text {
+            text-align: right;
+            flex: 1;
+        }
+
+        .header-text h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .header-text p {
+            font-size: 0.85rem;
+            opacity: 0.95;
+            margin-top: 0.3rem;
+            letter-spacing: 0.5px;
+            font-weight: 300;
+        }
+
+        /* Image Carousel */
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .carousel-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .carousel-image.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.7);
+            border: none;
+            padding: 12px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            transition: background 0.3s;
+            color: #333;
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(255,255,255,0.95);
+        }
+
+        .carousel-btn.prev {
+            left: 20px;
+        }
+
+        .carousel-btn.next {
+            right: 20px;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .indicator.active {
+            background: white;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, #639922 0%, #4a7b15 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(99,153,34,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+
+        .welcome-banner h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-banner p {
+            font-size: 1.05rem;
+            opacity: 0.95;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Quick Info Cards */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 1.8rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #639922, transparent);
+            transition: left 0.6s ease;
+        }
+
+        .info-card:hover::before {
+            left: 100%;
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(99,153,34,0.15);
+            border-color: #639922;
+        }
+
+        .info-icon {
+            font-size: 2.8rem;
+            margin-bottom: 0.75rem;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover .info-icon {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #639922;
+            letter-spacing: 0.5px;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 3rem;
+        }
+
+        section h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1.8rem;
+            padding-bottom: 1rem;
+            border-bottom: 4px solid #639922;
+            position: relative;
+            letter-spacing: 0.5px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #639922, #4a7b15);
+            border-radius: 2px;
+        }
+
+        /* Breakfast List */
+        .breakfast-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .breakfast-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: #f0f7e8;
+            border-radius: 8px;
+        }
+
+        .breakfast-item-check {
+            font-size: 1.2rem;
+            color: #639922;
+        }
+
+        /* Amenities Grid */
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .amenity-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.25rem;
+            border-left: 4px solid #639922;
+        }
+
+        .amenity-card h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .amenity-card p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Policies */
+        .policy-alert {
+            background: #fff5f5;
+            border: 2px solid #e85d5d;
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .policy-alert-icon {
+            font-size: 1.5rem;
+        }
+
+        .policy-content h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #d32f2f;
+        }
+
+        .policy-content p {
+            margin: 0;
+            color: #333;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* TV Navigation Guide */
+        .tv-guide-section {
+            margin-bottom: 2rem;
+        }
+
+        .tv-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tv-image-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .tv-image-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .tv-image-label {
+            padding: 1rem;
+            background: #f9f9f9;
+            text-align: center;
+            font-weight: 500;
+            color: #333;
+        }
+
+        /* Search Bar */
+        .search-container {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 12px 12px 12px 40px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            color: #999;
+        }
+
+        .search-results {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Channel Grid */
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .channel-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border-left: 4px solid #639922;
+        }
+
+        .channel-card:hover {
+            box-shadow: 0 8px 20px rgba(99,153,34,0.15);
+            transform: translateY(-4px);
+            border-left-color: #4a7b15;
+        }
+
+        .channel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .channel-code {
+            font-size: 0.85rem;
+            color: #639922;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .channel-name {
+            font-size: 0.95rem;
+            color: #333;
+            font-weight: 600;
+            margin-top: 0.4rem;
+            line-height: 1.3;
+        }
+
+        .channel-numbers {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .channel-number {
+            background: linear-gradient(135deg, #f5f5f5 0%, #f9f9f9 100%);
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #555;
+            border: 1px solid #e0e0e0;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .channel-number:hover {
+            background: linear-gradient(135deg, #639922 0%, #4a7b15 100%);
+            color: white;
+            border-color: #639922;
+        }
+
+        .channel-tv {
+            background: linear-gradient(135deg, #f5f5f5 0%, #f9f9f9 100%);
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #555;
+            border: 1px solid #e0e0e0;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .channel-tv:hover {
+            background: linear-gradient(135deg, #639922 0%, #4a7b15 100%);
+            color: white;
+            border-color: #639922;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .carousel {
+                height: 250px;
+            }
+
+            section h2 {
+                font-size: 1.25rem;
+            }
+
+            .channels-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Logo -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="suites.png" alt="Extended Stay America Logo">
+            </div>
+            <div class="header-text">
+                <h1>Cincinnati-Covington</h1>
+                <p>Your home away from home</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Image Carousel -->
+    <div class="carousel">
+        <img src="esa3.jpg" alt="Hotel exterior" class="carousel-image active">
+        <img src="esa2.jpg" alt="Hotel side view" class="carousel-image">
+        <img src="esa1.jpg" alt="Hotel branded view" class="carousel-image">
+
+        <button class="carousel-btn prev" onclick="changeImage(-1)">❮</button>
+        <button class="carousel-btn next" onclick="changeImage(1)">❯</button>
+
+        <div class="carousel-indicators">
+            <button class="indicator active" onclick="goToImage(0)"></button>
+            <button class="indicator" onclick="goToImage(1)"></button>
+            <button class="indicator" onclick="goToImage(2)"></button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Welcome Banner -->
+        <div class="welcome-banner">
+            <h2>Welcome to Your Home Away from Home</h2>
+            <p>We're delighted to have you stay with us. This guide contains important information to make your stay comfortable and enjoyable.</p>
+        </div>
+
+        <!-- Quick Info Cards -->
+        <div class="info-cards">
+            <div class="info-card">
+                <div class="info-icon">🕐</div>
+                <div class="info-label">Check-Out Time</div>
+                <div class="info-value">11:00 AM</div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">☕</div>
+                <div class="info-label">Breakfast Hours</div>
+                <div class="info-value">6:00 AM – 9:30 AM</div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">💪</div>
+                <div class="info-label">Fitness Room</div>
+                <div class="info-value">5:00 AM – 10:00 PM</div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">🧺</div>
+                <div class="info-label">Laundry & Vending</div>
+                <div class="info-value">24/7 • Ground Floor</div>
+            </div>
+        </div>
+
+        <!-- Breakfast Section -->
+        <section>
+            <h2>Complimentary Breakfast Includes</h2>
+            <div class="breakfast-grid">
+                <div class="breakfast-item">
+                    <span class="breakfast-item-check">✓</span>
+                    <span>Filter coffee & instant coffee packs</span>
+                </div>
+                <div class="breakfast-item">
+                    <span class="breakfast-item-check">✓</span>
+                    <span>Creamer & hot chocolate</span>
+                </div>
+                <div class="breakfast-item">
+                    <span class="breakfast-item-check">✓</span>
+                    <span>Green tea</span>
+                </div>
+                <div class="breakfast-item">
+                    <span class="breakfast-item-check">✓</span>
+                    <span>Oatmeal packs</span>
+                </div>
+                <div class="breakfast-item">
+                    <span class="breakfast-item-check">✓</span>
+                    <span>Nutri-Grain bars & honey buns</span>
+                </div>
+                <div class="breakfast-item">
+                    <span class="breakfast-item-check">✓</span>
+                    <span>Hot water</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Amenities Section -->
+        <section>
+            <h2>Hotel Amenities & Services</h2>
+            <div class="amenities-grid">
+                <div class="amenity-card">
+                    <h3>Housekeeping</h3>
+                    <p>Complimentary for stays over 14 days</p>
+                </div>
+                <div class="amenity-card">
+                    <h3>Pet Friendly</h3>
+                    <p>Pets must be caged when alone, on leash outside</p>
+                </div>
+                <div class="amenity-card">
+                    <h3>Available on Request</h3>
+                    <p>Kitchen items, dish detergent, hair dryer, coffee machine, toaster</p>
+                </div>
+                <div class="amenity-card">
+                    <h3>Linens & Trash</h3>
+                    <p>Exchange at front desk. Dispose garbage in trash room on your floor near elevator</p>
+                </div>
+                <div class="amenity-card">
+                    <h3>Ice Machine</h3>
+                    <p>Located on ground floor in laundry room - 24/7 access</p>
+                </div>
+                <div class="amenity-card">
+                    <h3>Vending Machine</h3>
+                    <p>Located on ground floor in laundry room - available 24/7</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Important Policies -->
+        <section>
+            <h2>Important Policies</h2>
+            <div class="policy-alert">
+                <div class="policy-alert-icon">⚠️</div>
+                <div class="policy-content">
+                    <h3>Smoking Policy</h3>
+                    <p>Smoking in rooms will result in a <strong>$250 penalty, deposit forfeiture, and possible stay termination without refund</strong>. Our rooms are designated non-smoking to ensure the comfort of all guests.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TV Navigation Guide -->
+        <section class="tv-guide-section">
+            <h2>TV Navigation Guide</h2>
+            <p style="margin-bottom: 1.5rem; color: #666;">Use these guides to easily navigate your television and find channels quickly.</p>
+            <div class="tv-images">
+                <div class="tv-image-card">
+                    <img src="New-Fire-TV-Home-Navigation-Icons-showing-Input-tab.webp" alt="Fire TV Navigation Guide">
+                    <div class="tv-image-label">TV Navigation Controls</div>
+                </div>
+                <div class="tv-image-card">
+                    <img src="hPqDtwfxN4NOD4s6b6ecWwSRY__1_.avif" alt="TV Remote Controls">
+                    <div class="tv-image-label">Remote Control Guide</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TV Channel Guide -->
+        <section>
+            <h2>TV Channel Guide</h2>
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="channelSearch" placeholder="Search channels by name, code, or number..." onkeyup="filterChannels()">
+            </div>
+            <div class="search-results">
+                Found <span id="channelCount">150</span> channels
+            </div>
+            <div class="channels-grid" id="channelsGrid">
+                <!-- Channels will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>Questions? Please contact the front desk or call the main number.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Carousel functionality
+        let currentImageIndex = 0;
+        const totalImages = 3;
+
+        function changeImage(direction) {
+            currentImageIndex = (currentImageIndex + direction + totalImages) % totalImages;
+            updateCarousel();
+        }
+
+        function goToImage(index) {
+            currentImageIndex = index;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const images = document.querySelectorAll('.carousel-image');
+            const indicators = document.querySelectorAll('.indicator');
+
+            images.forEach(img => img.classList.remove('active'));
+            indicators.forEach(ind => ind.classList.remove('active'));
+
+            images[currentImageIndex].classList.add('active');
+            indicators[currentImageIndex].classList.add('active');
+        }
+
+        // Channel data - sorted by channel number
+        const channels = [
+            { code: 'COZI', name: 'WBQC WKRP Cozi TV', num: '24-1', tv: '0.1' },
+            { code: 'D2', name: 'WSTR 2 Antenna TV', num: '24-2', tv: '0.2' },
+            { code: 'TELEM', name: 'TELEMUNDO', num: '24-3', tv: '0.3' },
+            { code: 'DSC', name: 'DISCOVERY', num: '32-1', tv: '0.1' },
+            { code: 'HISTORY', name: 'HISTORY', num: '32-2', tv: '0.2' },
+            { code: 'FX', name: 'FX', num: '32-3', tv: '0.3' },
+            { code: 'OXYGEN', name: 'OXYGEN', num: '56-1', tv: '0.1' },
+            { code: 'WE', name: 'WE TV', num: '56-2', tv: '0.2' },
+            { code: 'POP', name: 'POP', num: '56-3', tv: '0.3' },
+            { code: 'BYUTV', name: 'BYU TV', num: '64-1', tv: '0.1' },
+            { code: 'IMPCNET', name: 'IMPACT NETWORK', num: '64-3', tv: '0.3' },
+            { code: 'GUIDELO', name: 'Local Channel Guide', num: '10-1', tv: '2.1' },
+            { code: 'SPCNEWS', name: 'Spectrum News', num: '10-2', tv: '2.2' },
+            { code: 'ABC', name: 'WCPO ABC', num: '11-1', tv: '3.1' },
+            { code: 'ABC2', name: 'WCPO 2 Court TV', num: '11-2', tv: '3.2' },
+            { code: 'CBS', name: 'WKRC CBS', num: '11-6', tv: '3.6' },
+            { code: 'FOX', name: 'WXIX FOX', num: '12-1', tv: '4.1' },
+            { code: 'FOX2', name: 'WXIX 2 Bounce TV', num: '12-2', tv: '4.2' },
+            { code: 'NBC', name: 'WLWT NBC', num: '12-6', tv: '4.6' },
+            { code: 'CW', name: 'WKRC 2 CW', num: '13-1', tv: '5.1' },
+            { code: 'PBS', name: 'WCET PBS', num: '13-6', tv: '5.6' },
+            { code: 'PBS2', name: 'WCET 2 PBS Create', num: '13-7', tv: '5.7' },
+            { code: 'ION', name: 'ION Television', num: '23-1', tv: '7.1' },
+            { code: 'METV', name: 'WLWT 2 MeTV', num: '23-2', tv: '7.2' },
+            { code: 'MYNET', name: 'WSTR MyTV', num: '23-3', tv: '7.3' },
+            { code: 'UNIMAS', name: 'UNIMAS', num: '25-1', tv: '1.1' },
+            { code: 'UNV', name: 'UNIVISION', num: '25-2', tv: '1.2' },
+            { code: 'DYSTR', name: 'DAYSTAR', num: '25-3', tv: '1.3' },
+            { code: 'TBN', name: 'TBN', num: '26-1', tv: '2.1' },
+            { code: 'RSN', name: 'BALLY Sports Ohio', num: '28-1', tv: '4.1' },
+            { code: 'GUIDED1', name: 'DELUXE GUIDE 1', num: '30-1', tv: '6.1' },
+            { code: 'USA', name: 'USA Network', num: '30-2', tv: '6.2' },
+            { code: 'AETV', name: 'AE', num: '30-3', tv: '6.3' },
+            { code: 'TNT', name: 'TNT', num: '31-1', tv: '' },
+            { code: 'TBS', name: 'TBS', num: '31-2', tv: '' },
+            { code: 'AMC', name: 'AMC', num: '31-3', tv: '' },
+            { code: 'BBCA', name: 'BBC AMERICA', num: '33-1', tv: '1.1' },
+            { code: 'SYFY', name: 'SYFY', num: '33-2', tv: '1.2' },
+            { code: 'TRUTV', name: 'TRU TV', num: '33-3', tv: '1.3' },
+            { code: 'COMEDY', name: 'COMEDY CENTRAL', num: '34-1', tv: '2.1' },
+            { code: 'PAR', name: 'PARAMOUNT', num: '34-2', tv: '2.2' },
+            { code: 'VH1', name: 'VH1', num: '34-3', tv: '2.3' },
+            { code: 'MTV', name: 'MTV', num: '35-1', tv: '3.1' },
+            { code: 'TVLAND', name: 'TV LAND', num: '35-2', tv: '3.2' },
+            { code: 'HALL', name: 'HALLMARK CHANNEL', num: '36-1', tv: '4.1' },
+            { code: 'NGC', name: 'NATIONAL GEOGRAPHIC', num: '36-2', tv: '4.1' },
+            { code: 'APL', name: 'ANIMAL PLANET', num: '36-3', tv: '4.3' },
+            { code: 'SCIENCE', name: 'SCIENCE', num: '37-1', tv: '5.1' },
+            { code: 'AHC', name: 'AHC', num: '37-2', tv: '5.2' },
+            { code: 'HGTV', name: 'HGTV', num: '37-3', tv: '5.3' },
+            { code: 'FOOD', name: 'FOOD NETWORK', num: '38-1', tv: '6.1' },
+            { code: 'TRAV', name: 'TRAVEL CHANNEL', num: '38-2', tv: '6.2' },
+            { code: 'TLC', name: 'TLC', num: '38-3', tv: '6.3' },
+            { code: 'BRAVO', name: 'BRAVO', num: '39-1', tv: '7.1' },
+            { code: 'E!', name: 'E!', num: '39-2', tv: '7.2' },
+            { code: 'LIFE', name: 'LIFETIME', num: '39-3', tv: '7.3' },
+            { code: 'OWN', name: 'OWN', num: '40-1', tv: '0.1' },
+            { code: 'BET', name: 'BET', num: '40-2', tv: '0.2' },
+            { code: 'OVATION', name: 'OVATION TV', num: '40-3', tv: '0.3' },
+            { code: 'CNN', name: 'CNN', num: '41-1', tv: '1.1' },
+            { code: 'FNC', name: 'FOX NEWS', num: '41-2', tv: '1.2' },
+            { code: 'MSNBC', name: 'MSNBC', num: '41-3', tv: '1.3' },
+            { code: 'HLN', name: 'HLN', num: '42-1', tv: '2.1' },
+            { code: 'CNBC', name: 'CNBC', num: '42-2', tv: '2.2' },
+            { code: 'FBN', name: 'FOX BUSINESS NETWORK', num: '42-3', tv: '2.3' },
+            { code: 'BLOOM', name: 'BLOOMBERG', num: '43-1', tv: '3.1' },
+            { code: 'WEATH', name: 'WEATHER CHANNEL', num: '43-2', tv: '3.2' },
+            { code: 'CSPAN', name: 'C-SPAN', num: '43-3', tv: '3.3' },
+            { code: 'DISN', name: 'DISNEY CHANNEL', num: '44-1', tv: '4.1' },
+            { code: 'BOOM', name: 'BOOMERANG', num: '44-2', tv: '4.2' },
+            { code: 'UKIDS', name: 'UNIVERSAL KIDS', num: '45-1', tv: '5.1' },
+            { code: 'NICKJR', name: 'NICK JR', num: '45-2', tv: '5.2' },
+            { code: 'NICK', name: 'NICKELODEON', num: '45-3', tv: '5.3' },
+            { code: 'TOON', name: 'CARTOON NETWORK', num: '46-1', tv: '6.1' },
+            { code: 'DFC', name: 'DISCOVERY FAMILY', num: '46-2', tv: '6.2' },
+            { code: 'CMT', name: 'CMT', num: '46-3', tv: '6.3' },
+            { code: 'GACF', name: 'GAC Family', num: '47-1', tv: '7.1' },
+            { code: 'ESPN', name: 'ESPN', num: '47-2', tv: '7.2' },
+            { code: 'ESPN2', name: 'ESPN2', num: '47-3', tv: '7.3' },
+            { code: 'GUIDED2', name: 'DELUXE GUIDE 2', num: '48-1', tv: '0.1' },
+            { code: 'TNF', name: 'Thursday Night Football', num: '48-2', tv: '0.2' },
+            { code: 'SEC', name: 'SEC NETWORK', num: '48-3', tv: '0.3' },
+            { code: 'FS1', name: 'FOX SPORTS 1', num: '49-1', tv: '1.1' },
+            { code: 'FS2', name: 'FOX SPORTS 2', num: '49-2', tv: '1.2' },
+            { code: 'MT', name: 'MOTORTREND', num: '49-3', tv: '1.3' },
+            { code: 'TCM', name: 'TCM', num: '50-1', tv: '2.1' },
+            { code: 'HSN', name: 'HSN', num: '50-2', tv: '2.2' },
+            { code: 'EWTN', name: 'EWTN', num: '50-3', tv: '2.3' },
+            { code: 'SHOPHQ', name: 'SHOP HQ', num: '51-1', tv: '3.1' },
+            { code: 'QVC', name: 'QVC', num: '51-2', tv: '3.2' },
+            { code: 'CNNE', name: 'CNN EN ESPANOL', num: '51-3', tv: '3.3' },
+            { code: 'NEWSNTN', name: 'NewsNation', num: '52-1', tv: '4.1' },
+            { code: 'MTV2', name: 'MTV2', num: '52-2', tv: '4.2' },
+            { code: 'MTVCLAS', name: 'MTV CLASSIC ROCK', num: '52-3', tv: '4.3' },
+            { code: 'UP', name: 'UP', num: '53-1', tv: '5.1' },
+            { code: 'RFDHD', name: 'RFDTV', num: '53-3', tv: '5.3' },
+            { code: 'VICE', name: 'VICELAND', num: '54-1', tv: '6.1' },
+            { code: 'FYI', name: 'FYI', num: '54-2', tv: '6.2' },
+            { code: 'DEST', name: 'DESTINATION AMERICA', num: '54-3', tv: '6.3' },
+            { code: 'ID', name: 'INVESTIGATION DISCOVERY', num: '55-1', tv: '7.1' },
+            { code: 'ACUWTHR', name: 'ACCU WEATHER', num: '55-2', tv: '7.2' },
+            { code: 'COOK', name: 'COOKING CHANNEL', num: '55-3', tv: '7.3' },
+            { code: 'GSN', name: 'GAME SHOW NETWORK', num: '57-1', tv: '1.1' },
+            { code: 'LOGO', name: 'LOGO', num: '57-2', tv: '1.2' },
+            { code: 'DLC', name: 'DISCOVERY LIFE', num: '57-3', tv: '1.3' },
+            { code: 'BHER', name: 'BET HER', num: '58-1', tv: '2.1' },
+            { code: 'TVONE', name: 'TV ONE', num: '58-2', tv: '2.2' },
+            { code: 'BBCWLD', name: 'BBC WORLD NEWS', num: '58-3', tv: '2.3' },
+            { code: 'NIKTON', name: 'NICKTOONS', num: '59-1', tv: '3.1' },
+            { code: 'TNCK', name: 'TEENNICK', num: '59-2', tv: '3.2' },
+            { code: 'MTVLIVE', name: 'MTV LIVE', num: '60-1', tv: '4.1' },
+            { code: 'RVLT', name: 'REVOLT', num: '60-2', tv: '4.2' },
+            { code: 'FUSE', name: 'FUSE', num: '60-3', tv: '4.3' },
+            { code: 'INSP', name: 'INSP', num: '61-1', tv: '5.1' },
+            { code: 'SUNDANC', name: 'SUNDANCETV', num: '61-2', tv: '5.2' },
+            { code: 'LMN', name: 'LMN', num: '62-2', tv: '6.2' },
+            { code: 'IFC', name: 'IFC', num: '62-3', tv: '6.3' },
+            { code: 'HMM', name: 'HALLMARK MOVIES & MYSTERIES', num: '63-1', tv: '7.1' },
+            { code: 'BETSOUL', name: 'BET SOUL', num: '63-2', tv: '7.2' },
+            { code: 'MAGN', name: 'MagNOlia Network', num: '65-1', tv: '1.1' },
+            { code: 'MTVU', name: 'MTVU', num: '65-2', tv: '1.2' },
+            { code: 'NEWSMX', name: 'NEWSMAX TV', num: '65-3', tv: '1.3' },
+            { code: 'BIGTEN', name: 'BIG TEN / BTN', num: '66-1', tv: '2.1' },
+            { code: 'ACC', name: 'ACC NETWORK', num: '66-2', tv: '2.2' },
+            { code: 'GUIDESP', name: 'SPORTS PASS GUIDE', num: '69-1', tv: '5.1' },
+            { code: 'BEIN', name: 'BEIN SPORTS', num: '69-2', tv: '5.2' },
+            { code: 'CBSSN', name: 'CBS SPORTS NETWORK', num: '70-1', tv: '6.1' },
+            { code: 'ESPND', name: 'ESPN DEPORTES', num: '73-2', tv: '1.2' },
+            { code: 'ESPNEWS', name: 'ESPN NEWS', num: '74-1', tv: '2.1' },
+            { code: 'ESPNU', name: 'ESPNU', num: '74-2', tv: '2.2' },
+            { code: 'FXDEP', name: 'FOX DEPORTES', num: '74-3', tv: '2.3' },
+            { code: 'GOLF', name: 'GOLF CHANNEL', num: '76-2', tv: '4.2' },
+            { code: 'MLBN', name: 'MLB NETWORK', num: '76-3', tv: '4.3' },
+            { code: 'MLBNSZ', name: 'MLB STRIKE ZONE', num: '77-1', tv: '5.1' },
+            { code: 'NBATV', name: 'NBA TV', num: '77-2', tv: '5.2' },
+            { code: 'NFLNET', name: 'NFL NETWORK', num: '77-3', tv: '5.3' },
+            { code: 'NFLNRZ', name: 'NFL REDZONE', num: '78-1', tv: '6.1' },
+            { code: 'NHLNET', name: 'NHL NETWORK', num: '78-2', tv: '6.2' },
+            { code: 'COWBOY', name: 'THE COWBOY CHANNEL', num: '78-3', tv: '6.3' },
+            { code: 'OUTD', name: 'OUTDOOR CHANNEL', num: '79-1', tv: '7.1' },
+            { code: 'TENNIS', name: 'TENNIS CHANNEL', num: '81-3', tv: '1.3' },
+            { code: 'FDTV', name: 'FanDuel TV', num: '82-1', tv: '2.1' },
+            { code: 'TUDN', name: 'TUDN', num: '82-2', tv: '2.2' },
+            { code: 'WILLOW', name: 'WILLOW CRICKET', num: '82-3', tv: '2.3' },
+            { code: 'HBO', name: 'HBO', num: '98-2', tv: '2.2' },
+            { code: 'HBO2', name: 'HBO 2', num: '98-3', tv: '2.3' },
+            { code: 'HBOSIG', name: 'HBO SIGNATURE', num: '98-4', tv: '2.4' },
+            { code: 'HBOC', name: 'HBO COMEDY', num: '99-1', tv: '3.1' },
+            { code: 'HBOF', name: 'HBO FAMILY', num: '99-2', tv: '3.2' },
+            { code: 'HBOLAT', name: 'HBO LATINO', num: '99-3', tv: '3.3' },
+            { code: 'HBOZ', name: 'HBO ZONE', num: '99-4', tv: '3.4' },
+            { code: 'MAX', name: 'CINEMAX', num: '14-2', tv: '6.2' },
+            { code: 'MOMAX', name: 'CINEMAX MOREMAX', num: '14-3', tv: '6.3' },
+            { code: 'ACMAX', name: 'CINEMAX ACTIONMAX', num: '14-4', tv: '6.4' },
+            { code: 'TXMAX', name: 'CINEMAX THRILLERMAX', num: '15-1', tv: '7.1' },
+            { code: '5MAX', name: 'CINEMAX 5 STARMAX', num: '15-2', tv: '7.2' },
+            { code: 'MOVIE', name: 'CINEMAX MOVIEMAX', num: '15-3', tv: '7.3' },
+            { code: 'OMAX', name: 'CINEMAX OUTERMAX', num: '15-4', tv: '7.4' },
+            { code: 'CMAX', name: 'CINEMAX LATINO', num: '16-1', tv: '0.1' }
+        ];
+
+        // Render all channels on page load
+        function renderChannels(channelsToRender) {
+            const grid = document.getElementById('channelsGrid');
+            grid.innerHTML = '';
+
+            // Sort channels by tv value (0.1, 0.2, 0.3, etc.)
+            const sorted = [...channelsToRender].sort((a, b) => {
+                const tvA = parseFloat(a.tv) || 999;
+                const tvB = parseFloat(b.tv) || 999;
+                return tvA - tvB;
+            });
+
+            sorted.forEach(channel => {
+                const card = document.createElement('div');
+                card.className = 'channel-card';
+                card.innerHTML = `
+                    <div class="channel-header">
+                        <div>
+                            <div class="channel-code">${channel.code}</div>
+                            <div class="channel-name">${channel.name}</div>
+                        </div>
+                    </div>
+                    <div class="channel-numbers">
+                        <div class="channel-number">${channel.num}</div>
+                        ${channel.tv ? `<div class="channel-tv">${channel.tv}</div>` : ''}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            document.getElementById('channelCount').textContent = channelsToRender.length;
+        }
+
+        // Filter channels by search
+        function filterChannels() {
+            const searchTerm = document.getElementById('channelSearch').value.toLowerCase();
+
+            if (!searchTerm.trim()) {
+                renderChannels(channels);
+                return;
+            }
+
+            const filtered = channels.filter(ch =>
+                ch.name.toLowerCase().includes(searchTerm) ||
+                ch.code.toLowerCase().includes(searchTerm) ||
+                ch.num.includes(searchTerm) ||
+                ch.tv.includes(searchTerm)
+            );
+
+            renderChannels(filtered);
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderChannels(channels);
+        });
+    </script>
+</body>
+</html>
