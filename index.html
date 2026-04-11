@@ -725,6 +725,45 @@
             margin: 0;
         }
 
+        /* Language Toggle */
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            padding: 10px;
+            display: flex;
+            gap: 8px;
+            z-index: 10000;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn {
+            background: white;
+            border: 2px solid #639922;
+            padding: 10px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .lang-btn:hover {
+            background: #f0f7e8;
+            transform: scale(1.05);
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, #639922 0%, #4a7b15 100%);
+            color: white;
+            border-color: #639922;
+            box-shadow: 0 4px 12px rgba(99, 153, 34, 0.3);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .header-content {
@@ -743,10 +782,27 @@
             .channels-grid {
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             }
+
+            .language-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 8px;
+            }
+
+            .lang-btn {
+                padding: 8px 14px;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Language Toggle -->
+    <div class="language-toggle" id="languageToggle">
+        <button class="lang-btn active" onclick="switchLanguage('en')" id="btnEn">🇺🇸 ENGLISH</button>
+        <button class="lang-btn" onclick="switchLanguage('es')" id="btnEs">🇪🇸 ESPAÑOL</button>
+    </div>
+
     <!-- Header with Logo -->
     <header>
         <div class="header-content">
@@ -754,8 +810,8 @@
                 <img src="suites.png" alt="Extended Stay America Logo">
             </div>
             <div class="header-text">
-                <h1>Cincinnati-Covington</h1>
-                <p><span class="your">Your home away from home</span></p>
+                <h1 data-en="Cincinnati-Covington" data-es="Cincinnati-Covington">Cincinnati-Covington</h1>
+                <p><span class="your" data-en="Your home away from home" data-es="Su hogar lejos de casa">Your home away from home</span></p>
             </div>
         </div>
     </header>
@@ -781,126 +837,126 @@
         <!-- Welcome Banner -->
         <div class="welcome-banner">
             <h2>
-                <span class="line-1">Welcome</span>
-                <span class="line-2">to </span>
-                <span class="line-3">Your Home Away from Home</span>
+                <span class="line-1" data-en="Welcome" data-es="Bienvenido">Welcome</span>
+                <span class="line-2" data-en="to " data-es="a ">to </span>
+                <span class="line-3" data-en="Your Home Away from Home" data-es="Su Hogar Lejos de Casa">Your Home Away from Home</span>
             </h2>
-            <p>We're delighted to have you stay with us. This guide contains important information to make your stay comfortable and enjoyable.</p>
+            <p data-en="We're delighted to have you stay with us. This guide contains important information to make your stay comfortable and enjoyable." data-es="Nos complace que se hospede con nosotros. Esta guía contiene información importante para hacer su estancia cómoda y agradable.">We're delighted to have you stay with us. This guide contains important information to make your stay comfortable and enjoyable.</p>
         </div>
 
         <!-- Quick Info Cards -->
         <div class="info-cards">
             <div class="info-card">
                 <div class="info-icon">🕐</div>
-                <div class="info-label">Check-Out Time</div>
+                <div class="info-label" data-en="Check-Out Time" data-es="Hora de Salida">Check-Out Time</div>
                 <div class="info-value">11:00 AM</div>
             </div>
             <div class="info-card">
                 <div class="info-icon">☕</div>
-                <div class="info-label">Breakfast Hours</div>
+                <div class="info-label" data-en="Breakfast Hours" data-es="Horario de Desayuno">Breakfast Hours</div>
                 <div class="info-value">6:00 AM – 9:30 AM</div>
             </div>
             <div class="info-card">
                 <div class="info-icon">💪</div>
-                <div class="info-label">Fitness Room</div>
+                <div class="info-label" data-en="Fitness Room" data-es="Sala de Fitness">Fitness Room</div>
                 <div class="info-value">5:00 AM – 10:00 PM</div>
             </div>
             <div class="info-card">
                 <div class="info-icon">🧺</div>
-                <div class="info-label">Laundry & Vending</div>
-                <div class="info-value">24/7 • Ground Floor</div>
+                <div class="info-label" data-en="Laundry & Vending" data-es="Lavandería y Máquinas">Laundry & Vending</div>
+                <div class="info-value" data-en="24/7 • Ground Floor" data-es="24/7 • Planta Baja">24/7 • Ground Floor</div>
             </div>
         </div>
 
         <!-- Breakfast Section -->
         <section>
-            <h2>Complimentary Grab and Go Breakfast Includes</h2>
+            <h2 data-en="Complimentary Grab and Go Breakfast Includes" data-es="Desayuno Gratuito Incluye">Complimentary Grab and Go Breakfast Includes</h2>
             <div class="breakfast-grid">
                 <div class="breakfast-item">
                     <span class="breakfast-item-check">✓</span>
-                    <span>Filter coffee & instant coffee packs</span>
+                    <span data-en="Filter coffee & instant coffee packs" data-es="Café filtrado y paquetes de café instantáneo">Filter coffee & instant coffee packs</span>
                 </div>
                 <div class="breakfast-item">
                     <span class="breakfast-item-check">✓</span>
-                    <span>Creamer & hot chocolate</span>
+                    <span data-en="Creamer & hot chocolate" data-es="Crema y chocolate caliente">Creamer & hot chocolate</span>
                 </div>
                 <div class="breakfast-item">
                     <span class="breakfast-item-check">✓</span>
-                    <span>Green tea</span>
+                    <span data-en="Green tea" data-es="Té verde">Green tea</span>
                 </div>
                 <div class="breakfast-item">
                     <span class="breakfast-item-check">✓</span>
-                    <span>Oatmeal packs</span>
+                    <span data-en="Oatmeal packs" data-es="Paquetes de avena">Oatmeal packs</span>
                 </div>
                 <div class="breakfast-item">
                     <span class="breakfast-item-check">✓</span>
-                    <span>Nutri-Grain bars & honey buns</span>
+                    <span data-en="Nutri-Grain bars & honey buns" data-es="Barras Nutri-Grain y bollos de miel">Nutri-Grain bars & honey buns</span>
                 </div>
                 <div class="breakfast-item">
                     <span class="breakfast-item-check">✓</span>
-                    <span>Hot water</span>
+                    <span data-en="Hot water" data-es="Agua caliente">Hot water</span>
                 </div>
             </div>
         </section>
 
         <!-- Amenities Section -->
         <section>
-            <h2>Hotel Amenities & Services</h2>
+            <h2 data-en="Hotel Amenities & Services" data-es="Servicios y Comodidades del Hotel">Hotel Amenities & Services</h2>
             <div class="amenities-grid">
                 <div class="amenity-card">
-                    <h3>Housekeeping</h3>
-                    <p>Complimentary for stays over 14 days</p>
+                    <h3 data-en="Housekeeping" data-es="Servicio de Limpieza">Housekeeping</h3>
+                    <p data-en="Complimentary for stays over 14 days" data-es="Gratuito para estadías de más de 14 días">Complimentary for stays over 14 days</p>
                 </div>
                 <div class="amenity-card">
-                    <h3>Pet Friendly</h3>
-                    <p>Pets must be caged when alone, on leash outside</p>
+                    <h3 data-en="Pet Friendly" data-es="Admitimos Mascotas">Pet Friendly</h3>
+                    <p data-en="Pets must be caged when alone, on leash outside" data-es="Las mascotas deben estar enjauladas cuando están solas, con correa afuera">Pets must be caged when alone, on leash outside</p>
                 </div>
                 <div class="amenity-card">
-                    <h3>Available on Request</h3>
-                    <p>Kitchen items, dish detergent, hair dryer, coffee machine, toaster</p>
+                    <h3 data-en="Available on Request" data-es="Disponible bajo Solicitud">Available on Request</h3>
+                    <p data-en="Kitchen items, dish detergent, hair dryer, coffee machine, toaster" data-es="Artículos de cocina, detergente para platos, secador de cabello, máquina de café, tostadora">Kitchen items, dish detergent, hair dryer, coffee machine, toaster</p>
                 </div>
                 <div class="amenity-card">
-                    <h3>Linens & Trash</h3>
-                    <p>Exchange at front desk. Dispose garbage in trash room on your floor near elevator</p>
+                    <h3 data-en="Linens & Trash" data-es="Ropa de Cama y Basura">Linens & Trash</h3>
+                    <p data-en="Exchange at front desk. Dispose garbage in trash room on your floor near elevator" data-es="Canje en la recepción. Deseche la basura en la sala de basura de su piso">Exchange at front desk. Dispose garbage in trash room on your floor near elevator</p>
                 </div>
                 <div class="amenity-card">
-                    <h3>Ice Machine</h3>
-                    <p>Located on ground floor in laundry room - 24/7 access</p>
+                    <h3 data-en="Ice Machine" data-es="Máquina de Hielo">Ice Machine</h3>
+                    <p data-en="Located on ground floor in laundry room - 24/7 access" data-es="Ubicada en la planta baja en la lavandería - acceso 24/7">Located on ground floor in laundry room - 24/7 access</p>
                 </div>
                 <div class="amenity-card">
-                    <h3>Vending Machine</h3>
-                    <p>Located on ground floor in laundry room - available 24/7</p>
+                    <h3 data-en="Vending Machine" data-es="Máquina Expendedora">Vending Machine</h3>
+                    <p data-en="Located on ground floor in laundry room - available 24/7" data-es="Ubicada en la planta baja en la lavandería - disponible 24/7">Located on ground floor in laundry room - available 24/7</p>
                 </div>
             </div>
         </section>
 
         <!-- Important Policies -->
         <section>
-            <h2>Important Policies</h2>
+            <h2 data-en="Important Policies" data-es="Políticas Importantes">Important Policies</h2>
             <div class="policy-alert">
                 <div class="policy-alert-icon">⚠️</div>
                 <div class="policy-content">
-                    <h3>Smoking Policy</h3>
-                    <p>Smoking in rooms will result in a <strong>$250 penalty, deposit forfeiture, and possible stay termination without refund</strong>. Our rooms are designated non-smoking to ensure the comfort of all guests.</p>
+                    <h3 data-en="Smoking Policy" data-es="Política de No Fumar">Smoking Policy</h3>
+                    <p data-en="Smoking in rooms will result in a $250 penalty, deposit forfeiture, and possible stay termination without refund. Our rooms are designated non-smoking to ensure the comfort of all guests." data-es="Fumar en las habitaciones resultará en una multa de $250, pérdida del depósito, y posible terminación de la estancia sin reembolso. Nuestras habitaciones son de no fumar para garantizar la comodidad de todos los huéspedes.">Smoking in rooms will result in a <strong>$250 penalty, deposit forfeiture, and possible stay termination without refund</strong>. Our rooms are designated non-smoking to ensure the comfort of all guests.</p>
                 </div>
             </div>
         </section>
 
         <!-- TV Navigation Guide -->
         <section class="tv-guide-section">
-            <h2>TV Navigation Guide</h2>
-            <p style="margin-bottom: 1.5rem; color: #666;">Use these guides to easily navigate your television and find channels quickly.</p>
+            <h2 data-en="TV Navigation Guide" data-es="Guía de Navegación de TV">TV Navigation Guide</h2>
+            <p style="margin-bottom: 1.5rem; color: #666;" data-en="Use these guides to easily navigate your television and find channels quickly." data-es="Use estas guías para navegar fácilmente su televisor y encontrar canales rápidamente.">Use these guides to easily navigate your television and find channels quickly.</p>
             
 
         <!-- TV Channel Guide -->
         <section>
-            <h2>TV Channel Guide</h2>
+            <h2 data-en="TV Channel Guide" data-es="Guía de Canales de TV">TV Channel Guide</h2>
             <div class="search-container">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="channelSearch" placeholder="Search channels by name, code, or number..." onkeyup="filterChannels()">
+                <input type="text" id="channelSearch" placeholder="Search channels by name, code, or number..." data-placeholder-en="Search channels by name, code, or number..." data-placeholder-es="Buscar canales por nombre, código o número..." onkeyup="filterChannels()">
             </div>
             <div class="search-results">
-                Found <span id="channelCount">150</span> channels
+                <span data-en="Found " data-es="Se encontraron ">Found </span><span id="channelCount">150</span><span data-en=" channels" data-es=" canales"> channels</span>
             </div>
             <div class="channels-grid" id="channelsGrid">
                 <!-- Channels will be populated by JavaScript -->
@@ -909,12 +965,226 @@
 
         <!-- Footer -->
         <footer>
-            <p>Questions? Please contact the front desk.</p>
+            <p data-en="Questions? Please contact the front desk." data-es="¿Preguntas? Por favor, póngase en contacto con la recepción.">Questions? Please contact the front desk.</p>
         </footer>
     </div>
 
     <script>
-        // Carousel functionality
+        // ========== COMPLETE BILINGUAL LANGUAGE SYSTEM ==========
+        
+        // Current language state
+        let currentLanguage = localStorage.getItem('guestLanguage') || 'en';
+
+        // Channel translations (all 130+ channels)
+        const channelTranslations = {
+            ' Cozi TV': { en: ' Cozi TV', es: ' Cozi TV' },
+            'WSTR 2 Antenna TV': { en: 'WSTR 2 Antenna TV', es: 'WSTR 2 Televisión Antena' },
+            'TELEMUNDO': { en: 'TELEMUNDO', es: 'TELEMUNDO' },
+            'DISCOVERY': { en: 'DISCOVERY', es: 'DISCOVERY' },
+            'HISTORY': { en: 'HISTORY', es: 'HISTORIA' },
+            'FX': { en: 'FX', es: 'FX' },
+            'OXYGEN': { en: 'OXYGEN', es: 'OXÍGENO' },
+            'WE TV': { en: 'WE TV', es: 'WE TV' },
+            'POP': { en: 'POP', es: 'POP' },
+            'BYU TV': { en: 'BYU TV', es: 'BYU TV' },
+            'IMPACT NETWORK': { en: 'IMPACT NETWORK', es: 'RED DE IMPACTO' },
+            'Local Channel Guide': { en: 'Local Channel Guide', es: 'Guía de Canales Locales' },
+            'Spectrum News': { en: 'Spectrum News', es: 'Noticias Spectrum' },
+            'WCPO ABC': { en: 'WCPO ABC', es: 'WCPO ABC' },
+            'WCPO 2 Court TV': { en: 'WCPO 2 Court TV', es: 'WCPO 2 Corte TV' },
+            'WKRC CBS': { en: 'WKRC CBS', es: 'WKRC CBS' },
+            'WXIX FOX': { en: 'WXIX FOX', es: 'WXIX FOX' },
+            'WXIX 2 Bounce TV': { en: 'WXIX 2 Bounce TV', es: 'WXIX 2 Bounce TV' },
+            'WLWT NBC': { en: 'WLWT NBC', es: 'WLWT NBC' },
+            'WKRC 2 CW': { en: 'WKRC 2 CW', es: 'WKRC 2 CW' },
+            'WCET PBS': { en: 'WCET PBS', es: 'WCET PBS' },
+            'WCET 2 PBS Create': { en: 'WCET 2 PBS Create', es: 'WCET 2 PBS Crear' },
+            'ION Television': { en: 'ION Television', es: 'Televisión ION' },
+            'WLWT 2 MeTV': { en: 'WLWT 2 MeTV', es: 'WLWT 2 MeTV' },
+            'WSTR MyTV': { en: 'WSTR MyTV', es: 'WSTR MiTV' },
+            'UNIMAS': { en: 'UNIMAS', es: 'UNIMAS' },
+            'UNIVISION': { en: 'UNIVISION', es: 'UNIVISION' },
+            'DAYSTAR': { en: 'DAYSTAR', es: 'DAYSTAR' },
+            'TBN': { en: 'TBN', es: 'TBN' },
+            'BALLY Sports Ohio': { en: 'BALLY Sports Ohio', es: 'BALLY Sports Ohio' },
+            'DELUXE GUIDE 1': { en: 'DELUXE GUIDE 1', es: 'GUÍA DE LUJO 1' },
+            'USA Network': { en: 'USA Network', es: 'Red USA' },
+            'AE': { en: 'AE', es: 'AE' },
+            'TNT': { en: 'TNT', es: 'TNT' },
+            'TBS': { en: 'TBS', es: 'TBS' },
+            'AMC': { en: 'AMC', es: 'AMC' },
+            'BBC AMERICA': { en: 'BBC AMERICA', es: 'BBC AMÉRICA' },
+            'SYFY': { en: 'SYFY', es: 'SYFY' },
+            'TRU TV': { en: 'TRU TV', es: 'TRU TV' },
+            'COMEDY CENTRAL': { en: 'COMEDY CENTRAL', es: 'COMEDIA CENTRAL' },
+            'PARAMOUNT': { en: 'PARAMOUNT', es: 'PARAMOUNT' },
+            'VH1': { en: 'VH1', es: 'VH1' },
+            'MTV': { en: 'MTV', es: 'MTV' },
+            'TV LAND': { en: 'TV LAND', es: 'TV LAND' },
+            'HALLMARK CHANNEL': { en: 'HALLMARK CHANNEL', es: 'CANAL HALLMARK' },
+            'NATIONAL GEOGRAPHIC': { en: 'NATIONAL GEOGRAPHIC', es: 'NATIONAL GEOGRAPHIC' },
+            'ANIMAL PLANET': { en: 'ANIMAL PLANET', es: 'PLANETA ANIMAL' },
+            'SCIENCE': { en: 'SCIENCE', es: 'CIENCIA' },
+            'AHC': { en: 'AHC', es: 'AHC' },
+            'HGTV': { en: 'HGTV', es: 'HGTV' },
+            'FOOD NETWORK': { en: 'FOOD NETWORK', es: 'RED DE ALIMENTOS' },
+            'TRAVEL CHANNEL': { en: 'TRAVEL CHANNEL', es: 'CANAL DE VIAJES' },
+            'TLC': { en: 'TLC', es: 'TLC' },
+            'BRAVO': { en: 'BRAVO', es: 'BRAVO' },
+            'E!': { en: 'E!', es: 'E!' },
+            'LIFETIME': { en: 'LIFETIME', es: 'LIFETIME' },
+            'OWN': { en: 'OWN', es: 'OWN' },
+            'BET': { en: 'BET', es: 'BET' },
+            'OVATION TV': { en: 'OVATION TV', es: 'TV OVACIÓN' },
+            'CNN': { en: 'CNN', es: 'CNN' },
+            'FOX NEWS': { en: 'FOX NEWS', es: 'NOTICIAS FOX' },
+            'MSNBC': { en: 'MSNBC', es: 'MSNBC' },
+            'HLN': { en: 'HLN', es: 'HLN' },
+            'CNBC': { en: 'CNBC', es: 'CNBC' },
+            'FOX BUSINESS NETWORK': { en: 'FOX BUSINESS NETWORK', es: 'RED DE NEGOCIOS FOX' },
+            'BLOOMBERG': { en: 'BLOOMBERG', es: 'BLOOMBERG' },
+            'WEATHER CHANNEL': { en: 'WEATHER CHANNEL', es: 'CANAL DEL TIEMPO' },
+            'C-SPAN': { en: 'C-SPAN', es: 'C-SPAN' },
+            'DISNEY CHANNEL': { en: 'DISNEY CHANNEL', es: 'CANAL DISNEY' },
+            'BOOMERANG': { en: 'BOOMERANG', es: 'BOOMERANG' },
+            'UNIVERSAL KIDS': { en: 'UNIVERSAL KIDS', es: 'NIÑOS UNIVERSAL' },
+            'NICK JR': { en: 'NICK JR', es: 'NICK JR' },
+            'NICKELODEON': { en: 'NICKELODEON', es: 'NICKELODEON' },
+            'CARTOON NETWORK': { en: 'CARTOON NETWORK', es: 'CARTOON NETWORK' },
+            'DISCOVERY FAMILY': { en: 'DISCOVERY FAMILY', es: 'FAMILIA DISCOVERY' },
+            'CMT': { en: 'CMT', es: 'CMT' },
+            'GAC Family': { en: 'GAC Family', es: 'Familia GAC' },
+            'ESPN': { en: 'ESPN', es: 'ESPN' },
+            'ESPN2': { en: 'ESPN2', es: 'ESPN2' },
+            'DELUXE GUIDE 2': { en: 'DELUXE GUIDE 2', es: 'GUÍA DE LUJO 2' },
+            'Thursday Night Football': { en: 'Thursday Night Football', es: 'Fútbol de Jueves Noche' },
+            'SEC NETWORK': { en: 'SEC NETWORK', es: 'RED SEC' },
+            'FOX SPORTS 1': { en: 'FOX SPORTS 1', es: 'FOX DEPORTES 1' },
+            'FOX SPORTS 2': { en: 'FOX SPORTS 2', es: 'FOX DEPORTES 2' },
+            'MOTORTREND': { en: 'MOTORTREND', es: 'MOTORTREND' },
+            'TCM': { en: 'TCM', es: 'TCM' },
+            'HSN': { en: 'HSN', es: 'HSN' },
+            'EWTN': { en: 'EWTN', es: 'EWTN' },
+            'SHOP HQ': { en: 'SHOP HQ', es: 'COMPRE HQ' },
+            'QVC': { en: 'QVC', es: 'QVC' },
+            'CNN EN ESPANOL': { en: 'CNN EN ESPANOL', es: 'CNN EN ESPAÑOL' },
+            'NewsNation': { en: 'NewsNation', es: 'NoticiasNación' },
+            'MTV CLASSIC ROCK': { en: 'MTV CLASSIC ROCK', es: 'MTV ROCK CLÁSICO' },
+            'UP': { en: 'UP', es: 'UP' },
+            'RFDTV': { en: 'RFDTV', es: 'RFDTV' },
+            'VICELAND': { en: 'VICELAND', es: 'VICELAND' },
+            'FYI': { en: 'FYI', es: 'FYI' },
+            'DESTINATION AMERICA': { en: 'DESTINATION AMERICA', es: 'DESTINO AMÉRICA' },
+            'INVESTIGATION DISCOVERY': { en: 'INVESTIGATION DISCOVERY', es: 'INVESTIGACIÓN DISCOVERY' },
+            'ACCU WEATHER': { en: 'ACCU WEATHER', es: 'ACCU TIEMPO' },
+            'COOKING CHANNEL': { en: 'COOKING CHANNEL', es: 'CANAL DE COCINA' },
+            'GAME SHOW NETWORK': { en: 'GAME SHOW NETWORK', es: 'RED DE JUEGOS' },
+            'LOGO': { en: 'LOGO', es: 'LOGO' },
+            'BET HER': { en: 'BET HER', es: 'BET ELLA' },
+            'TV ONE': { en: 'TV ONE', es: 'TV UNO' },
+            'BBC WORLD NEWS': { en: 'BBC WORLD NEWS', es: 'NOTICIAS MUNDIALES BBC' },
+            'NICKTOONS': { en: 'NICKTOONS', es: 'NICKTOONS' },
+            'TEENNICK': { en: 'TEENNICK', es: 'TEENNICK' },
+            'MTV LIVE': { en: 'MTV LIVE', es: 'MTV EN VIVO' },
+            'REVOLT': { en: 'REVOLT', es: 'REVOLT' },
+            'FUSE': { en: 'FUSE', es: 'FUSE' },
+            'INSP': { en: 'INSP', es: 'INSP' },
+            'SUNDANCETV': { en: 'SUNDANCETV', es: 'SUNDANCETV' },
+            'LMN': { en: 'LMN', es: 'LMN' },
+            'IFC': { en: 'IFC', es: 'IFC' },
+            'HALLMARK MOVIES & MYSTERIES': { en: 'HALLMARK MOVIES & MYSTERIES', es: 'PELÍCULAS Y MISTERIOS HALLMARK' },
+            'BET SOUL': { en: 'BET SOUL', es: 'BET ALMA' },
+            'MagNOlia Network': { en: 'MagNOlia Network', es: 'Red Magnolia' },
+            'MTVU': { en: 'MTVU', es: 'MTVU' },
+            'NEWSMAX TV': { en: 'NEWSMAX TV', es: 'NEWSMAX TV' },
+            'BIG TEN / BTN': { en: 'BIG TEN / BTN', es: 'BIG TEN / BTN' },
+            'ACC NETWORK': { en: 'ACC NETWORK', es: 'RED ACC' },
+            'SPORTS PASS GUIDE': { en: 'SPORTS PASS GUIDE', es: 'GUÍA DE PASE DEPORTES' },
+            'BEIN SPORTS': { en: 'BEIN SPORTS', es: 'BEIN DEPORTES' },
+            'CBS SPORTS NETWORK': { en: 'CBS SPORTS NETWORK', es: 'RED DEPORTES CBS' },
+            'ESPN DEPORTES': { en: 'ESPN DEPORTES', es: 'ESPN DEPORTES' },
+            'ESPN NEWS': { en: 'ESPN NEWS', es: 'NOTICIAS ESPN' },
+            'ESPNU': { en: 'ESPNU', es: 'ESPNU' },
+            'FOX DEPORTES': { en: 'FOX DEPORTES', es: 'FOX DEPORTES' },
+            'GOLF CHANNEL': { en: 'GOLF CHANNEL', es: 'CANAL DE GOLF' },
+            'MLB NETWORK': { en: 'MLB NETWORK', es: 'RED MLB' },
+            'MLB STRIKE ZONE': { en: 'MLB STRIKE ZONE', es: 'ZONA DE STRIKE MLB' },
+            'NBA TV': { en: 'NBA TV', es: 'NBA TV' },
+            'NFL NETWORK': { en: 'NFL NETWORK', es: 'RED NFL' },
+            'NFL REDZONE': { en: 'NFL REDZONE', es: 'ZONA ROJA NFL' },
+            'NHL NETWORK': { en: 'NHL NETWORK', es: 'RED NHL' },
+            'THE COWBOY CHANNEL': { en: 'THE COWBOY CHANNEL', es: 'EL CANAL DEL VAQUERO' },
+            'OUTDOOR CHANNEL': { en: 'OUTDOOR CHANNEL', es: 'CANAL AL AIRE LIBRE' },
+            'TENNIS CHANNEL': { en: 'TENNIS CHANNEL', es: 'CANAL DE TENIS' },
+            'FanDuel TV': { en: 'FanDuel TV', es: 'FanDuel TV' },
+            'TUDN': { en: 'TUDN', es: 'TUDN' },
+            'WILLOW CRICKET': { en: 'WILLOW CRICKET', es: 'WILLOW CRICKET' },
+            'HBO': { en: 'HBO', es: 'HBO' },
+            'HBO 2': { en: 'HBO 2', es: 'HBO 2' },
+            'HBO SIGNATURE': { en: 'HBO SIGNATURE', es: 'HBO FIRMA' },
+            'HBO COMEDY': { en: 'HBO COMEDY', es: 'HBO COMEDIA' },
+            'HBO FAMILY': { en: 'HBO FAMILY', es: 'HBO FAMILIA' },
+            'HBO LATINO': { en: 'HBO LATINO', es: 'HBO LATINO' },
+            'HBO ZONE': { en: 'HBO ZONE', es: 'HBO ZONA' },
+            'CINEMAX': { en: 'CINEMAX', es: 'CINEMAX' },
+            'CINEMAX MOREMAX': { en: 'CINEMAX MOREMAX', es: 'CINEMAX MOREMAX' },
+            'CINEMAX ACTIONMAX': { en: 'CINEMAX ACTIONMAX', es: 'CINEMAX ACTIONMAX' },
+            'CINEMAX THRILLERMAX': { en: 'CINEMAX THRILLERMAX', es: 'CINEMAX THRILLERMAX' },
+            'CINEMAX 5 STARMAX': { en: 'CINEMAX 5 STARMAX', es: 'CINEMAX 5 STARMAX' },
+            'CINEMAX MOVIEMAX': { en: 'CINEMAX MOVIEMAX', es: 'CINEMAX MOVIEMAX' },
+            'CINEMAX OUTERMAX': { en: 'CINEMAX OUTERMAX', es: 'CINEMAX OUTERMAX' },
+            'CINEMAX LATINO': { en: 'CINEMAX LATINO', es: 'CINEMAX LATINO' },
+            'FREEFORM': { en: 'FREEFORM', es: 'FREEFORM' },
+            'NETGEN WILD': { en: 'NETGEN WILD', es: 'NETGEN SALVAJE' },
+            'Bally Sports Ohio Plus': { en: 'Bally Sports Ohio Plus', es: 'Bally Sports Ohio Plus' },
+            'Bally Sports South': { en: 'Bally Sports South', es: 'Bally Sports Sur' }
+        };
+
+        // Switch language function
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('guestLanguage', lang);
+            updatePageLanguage();
+            updateButtonStates();
+        }
+
+        // Update all page elements with data attributes
+        function updatePageLanguage() {
+            // Update all elements with data-en and data-es attributes
+            document.querySelectorAll('[data-en][data-es]').forEach(element => {
+                const text = element.getAttribute('data-' + currentLanguage);
+                if (text) {
+                    element.textContent = text;
+                }
+            });
+
+            // Update search placeholder
+            const searchInput = document.getElementById('channelSearch');
+            if (searchInput) {
+                const placeholder = searchInput.getAttribute('data-placeholder-' + currentLanguage);
+                if (placeholder) {
+                    searchInput.placeholder = placeholder;
+                }
+            }
+
+            // Re-render channels with translated names
+            renderChannels(channels);
+        }
+
+        // Update button active states
+        function updateButtonStates() {
+            document.getElementById('btnEn').classList.toggle('active', currentLanguage === 'en');
+            document.getElementById('btnEs').classList.toggle('active', currentLanguage === 'es');
+        }
+
+        // Translate channel name
+        function translateChannelName(name) {
+            if (!name) return name;
+            const trans = channelTranslations[name];
+            return trans && trans[currentLanguage] ? trans[currentLanguage] : name;
+        }
+
+        // ========== CAROUSEL FUNCTIONALITY ==========
         let currentImageIndex = 0;
         const totalImages = 3;
 
@@ -1123,11 +1393,12 @@
             sorted.forEach(channel => {
                 const card = document.createElement('div');
                 card.className = 'channel-card';
+                const translatedName = translateChannelName(channel.name);
                 card.innerHTML = `
                     <div class="channel-header">
                         <div>
                             <div class="channel-code">${channel.code}</div>
-                            <div class="channel-name">${channel.name}</div>
+                            <div class="channel-name">${translatedName}</div>
                         </div>
                     </div>
                     <div class="channel-numbers">
@@ -1150,19 +1421,24 @@
                 return;
             }
 
-            const filtered = channels.filter(ch =>
-                ch.name.toLowerCase().includes(searchTerm) ||
-                ch.code.toLowerCase().includes(searchTerm) ||
-                ch.num.includes(searchTerm) ||
-                ch.tv.includes(searchTerm)
-            );
+            const filtered = channels.filter(ch => {
+                const translatedName = translateChannelName(ch.name);
+                return translatedName.toLowerCase().includes(searchTerm) ||
+                       ch.code.toLowerCase().includes(searchTerm) ||
+                       ch.num.includes(searchTerm) ||
+                       ch.tv.includes(searchTerm)
+            });
 
             renderChannels(filtered);
         }
 
         // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
+            updateButtonStates();
             renderChannels(channels);
+            if (currentLanguage !== 'en') {
+                updatePageLanguage();
+            }
         });
     </script>
 </body>
