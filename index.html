@@ -62,7 +62,7 @@
         .header-section {
             background: linear-gradient(135deg, #639922 0%, #4a7b15 100%);
             color: white;
-            padding: 4rem 1.5rem 3rem;
+            padding: 3rem 1.5rem 2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -103,15 +103,17 @@
         .logo {
             display: flex;
             justify-content: center;
-            margin-bottom: 1.5rem;
+            align-items: center;
+            margin-bottom: 1rem;
+            height: 100px;
         }
 
         .logo img {
-            height: 100px;
+            max-height: 100px;
+            max-width: 400px;
             width: auto;
             object-fit: contain;
             transition: transform 0.3s ease;
-            filter: brightness(0) invert(1);
         }
 
         .logo img:hover {
@@ -120,7 +122,7 @@
 
         .header-text h1 {
             font-size: 3rem;
-            margin: 0 0 0.5rem 0;
+            margin: 0.5rem 0;
             font-weight: 800;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -564,8 +566,12 @@
         }
 
         @media (max-width: 480px) {
-            .logo img {
+            .logo {
                 height: 80px;
+            }
+
+            .logo img {
+                max-height: 80px;
             }
 
             .header-text h1 {
@@ -593,10 +599,12 @@
 </head>
 <body>
     <!-- Language Buttons -->
-   <!-- Language Toggle -->
-    <div class="language-toggle" id="languageToggle">
+    <div class="language-toggle-left">
         <button class="lang-btn active" onclick="switchLanguage('en')" id="btnEn">🇺🇸 ENGLISH</button>
-        <button class="lang-btn" onclick="switchLanguage('es')" id="btnEs">🇪🇸 ESPAÑOL</button>
+    </div>
+
+    <div class="language-toggle-right">
+        <button class="lang-btn" onclick="switchLanguage('es')" id="btnEs">🇪🇸 ESPANOL</button>
     </div>
 
     <!-- Header Section -->
@@ -671,7 +679,7 @@
                 <div class="details-grid">
                     <div class="detail-card">
                         <h3 data-en="Fixed Rate Pricing" data-es="Tarifa Fija">Fixed Rate Pricing</h3>
-                        <p data-en="$25 per night + taxes for the first 6 nights. $11.25 per night after 6 nights. " data-es="$25 por noche + impuestos para los primeros 6 noches. $11.25 por noche  después de 6 noches. ">$25 per night + taxes for the first 6 nights. $11.25 per night after 6 nights.</p>
+                        <p data-en="$25 per night + taxes for the first 3 nights. $11 per night + taxes after 3 nights. Special rates available for extended stays." data-es="$25 por noche + impuestos para los primeros 3 noches. $11 por noche + impuestos después de 3 noches. Tarifas especiales disponibles para estadías prolongadas.">$25 per night + taxes for the first 3 nights. $11 per night + taxes after 3 nights. Special rates available for extended stays.</p>
                     </div>
 
                     <div class="detail-card">
@@ -698,7 +706,7 @@
 
                     <div class="detail-card">
                         <h3 data-en="Linen Exchange" data-es="Cambio de Ropa de Cama">Linen Exchange</h3>
-                        <p data-en="Fresh linens are available daily.You should visit the front desk for linen exchange." data-es=" Hay ropa de cama limpia disponible a diario. Debe dirigirse a la recepción para realizar el cambio de ropa de cama.">Fresh linens are available daily. You should visit the front desk for linen exchange.</p>
+                        <p data-en="Fresh linens are available daily. Simply place your used linens outside your room in the morning, and clean linens will be delivered. Or visit the front desk for immediate linen exchange during business hours." data-es="Ropa de cama fresca está disponible diariamente. Simplemente coloque su ropa de cama usada fuera de su habitación por la mañana, y se entregarán sábanas limpias.">Fresh linens are available daily. Simply place your used linens outside your room, and clean linens will be delivered. Contact front desk for assistance.</p>
                     </div>
                 </div>
             </section>
@@ -779,7 +787,7 @@
 
                     <div class="amenity-item">
                         <div class="amenity-icon">🍵</div>
-                        <div class="amenity-text" data-en="Green Tea Packets& Hot Water" data-es="Té Verde y Agua Caliente">Green Tea & Hot Water</div>
+                        <div class="amenity-text" data-en="Green Tea & Hot Water" data-es="Té Verde y Agua Caliente">Green Tea & Hot Water</div>
                     </div>
 
                     <div class="amenity-item">
@@ -797,7 +805,10 @@
                         <div class="amenity-text" data-en="Nutri-Grain Bars & Honey Buns" data-es="Barras Nutri-Grain y Bollos de Miel">Nutri-Grain Bars & Honey Buns</div>
                     </div>
 
-                
+                    <div class="amenity-item">
+                        <div class="amenity-icon">📌</div>
+                        <div class="amenity-text" data-en="Assorted Pastries & Muffins" data-es="Pasteles Variados y Magdalenas">Assorted Pastries & Muffins</div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -902,172 +913,179 @@
         // Language System
         let currentLanguage = localStorage.getItem('guestLanguage') || 'en';
 
-        // All 169 Channels Data
-     const channelTranslations = {
-            ' Cozi TV': { en: ' Cozi TV', es: ' Cozi TV' },
-            'WSTR 2 Antenna TV': { en: 'WSTR 2 Antenna TV', es: 'WSTR 2 Televisión Antena' },
-            'TELEMUNDO': { en: 'TELEMUNDO', es: 'TELEMUNDO' },
-            'DISCOVERY': { en: 'DISCOVERY', es: 'DISCOVERY' },
-            'HISTORY': { en: 'HISTORY', es: 'HISTORIA' },
-            'FX': { en: 'FX', es: 'FX' },
-            'OXYGEN': { en: 'OXYGEN', es: 'OXÍGENO' },
-            'WE TV': { en: 'WE TV', es: 'WE TV' },
-            'POP': { en: 'POP', es: 'POP' },
-            'BYU TV': { en: 'BYU TV', es: 'BYU TV' },
-            'IMPACT NETWORK': { en: 'IMPACT NETWORK', es: 'RED DE IMPACTO' },
-            'Local Channel Guide': { en: 'Local Channel Guide', es: 'Guía de Canales Locales' },
-            'Spectrum News': { en: 'Spectrum News', es: 'Noticias Spectrum' },
-            'WCPO ABC': { en: 'WCPO ABC', es: 'WCPO ABC' },
-            'WCPO 2 Court TV': { en: 'WCPO 2 Court TV', es: 'WCPO 2 Corte TV' },
-            'WKRC CBS': { en: 'WKRC CBS', es: 'WKRC CBS' },
-            'WXIX FOX': { en: 'WXIX FOX', es: 'WXIX FOX' },
-            'WXIX 2 Bounce TV': { en: 'WXIX 2 Bounce TV', es: 'WXIX 2 Bounce TV' },
-            'WLWT NBC': { en: 'WLWT NBC', es: 'WLWT NBC' },
-            'WKRC 2 CW': { en: 'WKRC 2 CW', es: 'WKRC 2 CW' },
-            'WCET PBS': { en: 'WCET PBS', es: 'WCET PBS' },
-            'WCET 2 PBS Create': { en: 'WCET 2 PBS Create', es: 'WCET 2 PBS Crear' },
-            'ION Television': { en: 'ION Television', es: 'Televisión ION' },
-            'WLWT 2 MeTV': { en: 'WLWT 2 MeTV', es: 'WLWT 2 MeTV' },
-            'WSTR MyTV': { en: 'WSTR MyTV', es: 'WSTR MiTV' },
-            'UNIMAS': { en: 'UNIMAS', es: 'UNIMAS' },
-            'UNIVISION': { en: 'UNIVISION', es: 'UNIVISION' },
-            'DAYSTAR': { en: 'DAYSTAR', es: 'DAYSTAR' },
-            'TBN': { en: 'TBN', es: 'TBN' },
-            'BALLY Sports Ohio': { en: 'BALLY Sports Ohio', es: 'BALLY Sports Ohio' },
-            'DELUXE GUIDE 1': { en: 'DELUXE GUIDE 1', es: 'GUÍA DE LUJO 1' },
-            'USA Network': { en: 'USA Network', es: 'Red USA' },
-            'AE': { en: 'AE', es: 'AE' },
-            'TNT': { en: 'TNT', es: 'TNT' },
-            'TBS': { en: 'TBS', es: 'TBS' },
-            'AMC': { en: 'AMC', es: 'AMC' },
-            'BBC AMERICA': { en: 'BBC AMERICA', es: 'BBC AMÉRICA' },
-            'SYFY': { en: 'SYFY', es: 'SYFY' },
-            'TRU TV': { en: 'TRU TV', es: 'TRU TV' },
-            'COMEDY CENTRAL': { en: 'COMEDY CENTRAL', es: 'COMEDIA CENTRAL' },
-            'PARAMOUNT': { en: 'PARAMOUNT', es: 'PARAMOUNT' },
-            'VH1': { en: 'VH1', es: 'VH1' },
-            'MTV': { en: 'MTV', es: 'MTV' },
-            'TV LAND': { en: 'TV LAND', es: 'TV LAND' },
-            'HALLMARK CHANNEL': { en: 'HALLMARK CHANNEL', es: 'CANAL HALLMARK' },
-            'NATIONAL GEOGRAPHIC': { en: 'NATIONAL GEOGRAPHIC', es: 'NATIONAL GEOGRAPHIC' },
-            'ANIMAL PLANET': { en: 'ANIMAL PLANET', es: 'PLANETA ANIMAL' },
-            'SCIENCE': { en: 'SCIENCE', es: 'CIENCIA' },
-            'AHC': { en: 'AHC', es: 'AHC' },
-            'HGTV': { en: 'HGTV', es: 'HGTV' },
-            'FOOD NETWORK': { en: 'FOOD NETWORK', es: 'RED DE ALIMENTOS' },
-            'TRAVEL CHANNEL': { en: 'TRAVEL CHANNEL', es: 'CANAL DE VIAJES' },
-            'TLC': { en: 'TLC', es: 'TLC' },
-            'BRAVO': { en: 'BRAVO', es: 'BRAVO' },
-            'E!': { en: 'E!', es: 'E!' },
-            'LIFETIME': { en: 'LIFETIME', es: 'LIFETIME' },
-            'OWN': { en: 'OWN', es: 'OWN' },
-            'BET': { en: 'BET', es: 'BET' },
-            'OVATION TV': { en: 'OVATION TV', es: 'TV OVACIÓN' },
-            'CNN': { en: 'CNN', es: 'CNN' },
-            'FOX NEWS': { en: 'FOX NEWS', es: 'NOTICIAS FOX' },
-            'MSNBC': { en: 'MSNBC', es: 'MSNBC' },
-            'HLN': { en: 'HLN', es: 'HLN' },
-            'CNBC': { en: 'CNBC', es: 'CNBC' },
-            'FOX BUSINESS NETWORK': { en: 'FOX BUSINESS NETWORK', es: 'RED DE NEGOCIOS FOX' },
-            'BLOOMBERG': { en: 'BLOOMBERG', es: 'BLOOMBERG' },
-            'WEATHER CHANNEL': { en: 'WEATHER CHANNEL', es: 'CANAL DEL TIEMPO' },
-            'C-SPAN': { en: 'C-SPAN', es: 'C-SPAN' },
-            'DISNEY CHANNEL': { en: 'DISNEY CHANNEL', es: 'CANAL DISNEY' },
-            'BOOMERANG': { en: 'BOOMERANG', es: 'BOOMERANG' },
-            'UNIVERSAL KIDS': { en: 'UNIVERSAL KIDS', es: 'NIÑOS UNIVERSAL' },
-            'NICK JR': { en: 'NICK JR', es: 'NICK JR' },
-            'NICKELODEON': { en: 'NICKELODEON', es: 'NICKELODEON' },
-            'CARTOON NETWORK': { en: 'CARTOON NETWORK', es: 'CARTOON NETWORK' },
-            'DISCOVERY FAMILY': { en: 'DISCOVERY FAMILY', es: 'FAMILIA DISCOVERY' },
-            'CMT': { en: 'CMT', es: 'CMT' },
-            'GAC Family': { en: 'GAC Family', es: 'Familia GAC' },
-            'ESPN': { en: 'ESPN', es: 'ESPN' },
-            'ESPN2': { en: 'ESPN2', es: 'ESPN2' },
-            'DELUXE GUIDE 2': { en: 'DELUXE GUIDE 2', es: 'GUÍA DE LUJO 2' },
-            'Thursday Night Football': { en: 'Thursday Night Football', es: 'Fútbol de Jueves Noche' },
-            'SEC NETWORK': { en: 'SEC NETWORK', es: 'RED SEC' },
-            'FOX SPORTS 1': { en: 'FOX SPORTS 1', es: 'FOX DEPORTES 1' },
-            'FOX SPORTS 2': { en: 'FOX SPORTS 2', es: 'FOX DEPORTES 2' },
-            'MOTORTREND': { en: 'MOTORTREND', es: 'MOTORTREND' },
-            'TCM': { en: 'TCM', es: 'TCM' },
-            'HSN': { en: 'HSN', es: 'HSN' },
-            'EWTN': { en: 'EWTN', es: 'EWTN' },
-            'SHOP HQ': { en: 'SHOP HQ', es: 'COMPRE HQ' },
-            'QVC': { en: 'QVC', es: 'QVC' },
-            'CNN EN ESPANOL': { en: 'CNN EN ESPANOL', es: 'CNN EN ESPAÑOL' },
-            'NewsNation': { en: 'NewsNation', es: 'NoticiasNación' },
-            'MTV CLASSIC ROCK': { en: 'MTV CLASSIC ROCK', es: 'MTV ROCK CLÁSICO' },
-            'UP': { en: 'UP', es: 'UP' },
-            'RFDTV': { en: 'RFDTV', es: 'RFDTV' },
-            'VICELAND': { en: 'VICELAND', es: 'VICELAND' },
-            'FYI': { en: 'FYI', es: 'FYI' },
-            'DESTINATION AMERICA': { en: 'DESTINATION AMERICA', es: 'DESTINO AMÉRICA' },
-            'INVESTIGATION DISCOVERY': { en: 'INVESTIGATION DISCOVERY', es: 'INVESTIGACIÓN DISCOVERY' },
-            'ACCU WEATHER': { en: 'ACCU WEATHER', es: 'ACCU TIEMPO' },
-            'COOKING CHANNEL': { en: 'COOKING CHANNEL', es: 'CANAL DE COCINA' },
-            'GAME SHOW NETWORK': { en: 'GAME SHOW NETWORK', es: 'RED DE JUEGOS' },
-            'LOGO': { en: 'LOGO', es: 'LOGO' },
-            'BET HER': { en: 'BET HER', es: 'BET ELLA' },
-            'TV ONE': { en: 'TV ONE', es: 'TV UNO' },
-            'BBC WORLD NEWS': { en: 'BBC WORLD NEWS', es: 'NOTICIAS MUNDIALES BBC' },
-            'NICKTOONS': { en: 'NICKTOONS', es: 'NICKTOONS' },
-            'TEENNICK': { en: 'TEENNICK', es: 'TEENNICK' },
-            'MTV LIVE': { en: 'MTV LIVE', es: 'MTV EN VIVO' },
-            'REVOLT': { en: 'REVOLT', es: 'REVOLT' },
-            'FUSE': { en: 'FUSE', es: 'FUSE' },
-            'INSP': { en: 'INSP', es: 'INSP' },
-            'SUNDANCETV': { en: 'SUNDANCETV', es: 'SUNDANCETV' },
-            'LMN': { en: 'LMN', es: 'LMN' },
-            'IFC': { en: 'IFC', es: 'IFC' },
-            'HALLMARK MOVIES & MYSTERIES': { en: 'HALLMARK MOVIES & MYSTERIES', es: 'PELÍCULAS Y MISTERIOS HALLMARK' },
-            'BET SOUL': { en: 'BET SOUL', es: 'BET ALMA' },
-            'MagNOlia Network': { en: 'MagNOlia Network', es: 'Red Magnolia' },
-            'MTVU': { en: 'MTVU', es: 'MTVU' },
-            'NEWSMAX TV': { en: 'NEWSMAX TV', es: 'NEWSMAX TV' },
-            'BIG TEN / BTN': { en: 'BIG TEN / BTN', es: 'BIG TEN / BTN' },
-            'ACC NETWORK': { en: 'ACC NETWORK', es: 'RED ACC' },
-            'SPORTS PASS GUIDE': { en: 'SPORTS PASS GUIDE', es: 'GUÍA DE PASE DEPORTES' },
-            'BEIN SPORTS': { en: 'BEIN SPORTS', es: 'BEIN DEPORTES' },
-            'CBS SPORTS NETWORK': { en: 'CBS SPORTS NETWORK', es: 'RED DEPORTES CBS' },
-            'ESPN DEPORTES': { en: 'ESPN DEPORTES', es: 'ESPN DEPORTES' },
-            'ESPN NEWS': { en: 'ESPN NEWS', es: 'NOTICIAS ESPN' },
-            'ESPNU': { en: 'ESPNU', es: 'ESPNU' },
-            'FOX DEPORTES': { en: 'FOX DEPORTES', es: 'FOX DEPORTES' },
-            'GOLF CHANNEL': { en: 'GOLF CHANNEL', es: 'CANAL DE GOLF' },
-            'MLB NETWORK': { en: 'MLB NETWORK', es: 'RED MLB' },
-            'MLB STRIKE ZONE': { en: 'MLB STRIKE ZONE', es: 'ZONA DE STRIKE MLB' },
-            'NBA TV': { en: 'NBA TV', es: 'NBA TV' },
-            'NFL NETWORK': { en: 'NFL NETWORK', es: 'RED NFL' },
-            'NFL REDZONE': { en: 'NFL REDZONE', es: 'ZONA ROJA NFL' },
-            'NHL NETWORK': { en: 'NHL NETWORK', es: 'RED NHL' },
-            'THE COWBOY CHANNEL': { en: 'THE COWBOY CHANNEL', es: 'EL CANAL DEL VAQUERO' },
-            'OUTDOOR CHANNEL': { en: 'OUTDOOR CHANNEL', es: 'CANAL AL AIRE LIBRE' },
-            'TENNIS CHANNEL': { en: 'TENNIS CHANNEL', es: 'CANAL DE TENIS' },
-            'FanDuel TV': { en: 'FanDuel TV', es: 'FanDuel TV' },
-            'TUDN': { en: 'TUDN', es: 'TUDN' },
-            'WILLOW CRICKET': { en: 'WILLOW CRICKET', es: 'WILLOW CRICKET' },
-            'HBO': { en: 'HBO', es: 'HBO' },
-            'HBO 2': { en: 'HBO 2', es: 'HBO 2' },
-            'HBO SIGNATURE': { en: 'HBO SIGNATURE', es: 'HBO FIRMA' },
-            'HBO COMEDY': { en: 'HBO COMEDY', es: 'HBO COMEDIA' },
-            'HBO FAMILY': { en: 'HBO FAMILY', es: 'HBO FAMILIA' },
-            'HBO LATINO': { en: 'HBO LATINO', es: 'HBO LATINO' },
-            'HBO ZONE': { en: 'HBO ZONE', es: 'HBO ZONA' },
-            'CINEMAX': { en: 'CINEMAX', es: 'CINEMAX' },
-            'CINEMAX MOREMAX': { en: 'CINEMAX MOREMAX', es: 'CINEMAX MOREMAX' },
-            'CINEMAX ACTIONMAX': { en: 'CINEMAX ACTIONMAX', es: 'CINEMAX ACTIONMAX' },
-            'CINEMAX THRILLERMAX': { en: 'CINEMAX THRILLERMAX', es: 'CINEMAX THRILLERMAX' },
-            'CINEMAX 5 STARMAX': { en: 'CINEMAX 5 STARMAX', es: 'CINEMAX 5 STARMAX' },
-            'CINEMAX MOVIEMAX': { en: 'CINEMAX MOVIEMAX', es: 'CINEMAX MOVIEMAX' },
-            'CINEMAX OUTERMAX': { en: 'CINEMAX OUTERMAX', es: 'CINEMAX OUTERMAX' },
-            'CINEMAX LATINO': { en: 'CINEMAX LATINO', es: 'CINEMAX LATINO' },
-            'FREEFORM': { en: 'FREEFORM', es: 'FREEFORM' },
-            'NETGEN WILD': { en: 'NETGEN WILD', es: 'NETGEN SALVAJE' },
-            'Bally Sports Ohio Plus': { en: 'Bally Sports Ohio Plus', es: 'Bally Sports Ohio Plus' },
-            'Bally Sports South': { en: 'Bally Sports South', es: 'Bally Sports Sur' }
-        };
+        // ALL 169 CHANNELS
+        const channels = [
+            { code: 'WCPO', name: 'WCPO ABC', num: '11-1', tv: '3.1' },
+            { code: 'WKRC', name: 'WKRC CBS', num: '11-6', tv: '3.6' },
+            { code: 'WLWT', name: 'WLWT NBC', num: '12-6', tv: '4.6' },
+            { code: 'WXIX', name: 'WXIX FOX', num: '12-1', tv: '4.1' },
+            { code: 'CW', name: 'WKRC 2 CW', num: '13-1', tv: '5.1' },
+            { code: 'PBS', name: 'WCET PBS', num: '13-6', tv: '5.6' },
+            { code: 'PBS2', name: 'WCET 2 PBS Create', num: '13-7', tv: '5.7' },
+            { code: 'MAX', name: 'CINEMAX', num: '14-2', tv: '6.2' },
+            { code: 'MOMAX', name: 'CINEMAX MOREMAX', num: '14-3', tv: '6.3' },
+            { code: 'ACMAX', name: 'CINEMAX ACTIONMAX', num: '14-4', tv: '6.4' },
+            { code: 'TXMAX', name: 'CINEMAX THRILLERMAX', num: '15-1', tv: '7.1' },
+            { code: '5MAX', name: 'CINEMAX 5 STARMAX', num: '15-2', tv: '7.2' },
+            { code: 'MOVIE', name: 'CINEMAX MOVIEMAX', num: '15-3', tv: '7.3' },
+            { code: 'OMAX', name: 'CINEMAX OUTERMAX', num: '15-4', tv: '7.4' },
+            { code: 'CMAX', name: 'CINEMAX LATINO', num: '16-1', tv: '0.1' },
+            { code: 'GUIDECI', name: 'CINEMAX GUIDE', num: '14-1', tv: '6.1' },
+            { code: 'COZIWBQC', name: 'WKRP Cozi TV', num: '24-1', tv: '0.1' },
+            { code: 'DSC', name: 'DISCOVERY', num: '32-1', tv: '0.1' },
+            { code: 'HISTORY', name: 'HISTORY', num: '32-2', tv: '0.2' },
+            { code: 'FX', name: 'FX', num: '32-3', tv: '0.3' },
+            { code: 'OWN', name: 'OWN', num: '40-1', tv: '0.1' },
+            { code: 'BET', name: 'BET', num: '40-2', tv: '0.2' },
+            { code: 'OVATION', name: 'OVATION TV', num: '40-3', tv: '0.3' },
+            { code: 'GUIDED2', name: 'DELUXE GUIDE 2', num: '48-1', tv: '0.1' },
+            { code: 'OXYGEN', name: 'OXYGEN', num: '56-1', tv: '0.1' },
+            { code: 'WE', name: 'WE TV', num: '56-2', tv: '0.2' },
+            { code: 'FXM', name: 'FXM', num: '64-2', tv: '0.2' },
+            { code: 'POP', name: 'POP', num: '56-3', tv: '0.3' },
+            { code: 'TELEM', name: 'TELEMUNDO', num: '324-3', tv: '0.3' },
+            { code: 'IMPNET', name: 'IMPACT NETWORK', num: '364-3', tv: '0.3' },
+            { code: 'BYUTV', name: 'BYU TV', num: '64-1', tv: '0.1' },
+            { code: 'UNIMAS', name: 'UNIMAS', num: '125-1', tv: '1.1' },
+            { code: 'BBCA', name: 'BBC AMERICA', num: '133-1', tv: '1.1' },
+            { code: 'CNN', name: 'CNN', num: '141-1', tv: '1.1' },
+            { code: 'FS1', name: 'FOX SPORTS 1', num: '149-1', tv: '1.1' },
+            { code: 'GSN', name: 'GAME SHOW NETWORK', num: '157-1', tv: '1.1' },
+            { code: 'MAGN', name: 'MagNOlia Network', num: '165-1', tv: '1.1' },
+            { code: 'UNV', name: 'UNIVISION', num: '225-2', tv: '1.2' },
+            { code: 'SYFY', name: 'SYFY', num: '233-2', tv: '1.2' },
+            { code: 'FNC', name: 'FOX NEWS', num: '241-2', tv: '1.2' },
+            { code: 'FS2', name: 'FOX SPORTS 2', num: '249-2', tv: '1.2' },
+            { code: 'LOGO', name: 'LOGO', num: '257-2', tv: '1.2' },
+            { code: 'MTVU', name: 'MTVU', num: '265-2', tv: '1.2' },
+            { code: 'ESPND', name: 'ESPN DEPORTES', num: '273-2', tv: '1.2' },
+            { code: 'ESPN2', name: 'ESPN2', num: '281-2', tv: '1.2' },
+            { code: 'GUIDELO', name: 'Local Channel Guide', num: '10-1', tv: '2.1' },
+            { code: 'TBN', name: 'TBN', num: '126-1', tv: '2.1' },
+            { code: 'COMEDY', name: 'COMEDY CENTRAL', num: '134-1', tv: '2.1' },
+            { code: 'HLN', name: 'HLN', num: '142-1', tv: '2.1' },
+            { code: 'TCM', name: 'TCM', num: '150-1', tv: '2.1' },
+            { code: 'BHER', name: 'BET HER', num: '158-1', tv: '2.1' },
+            { code: 'BIGTEN', name: 'BIG TEN / BTN', num: '166-1', tv: '2.1' },
+            { code: 'ESPNEWS', name: 'ESPN NEWS', num: '174-1', tv: '2.1' },
+            { code: 'FDTV', name: 'FanDuel TV', num: '182-1', tv: '2.1' },
+            { code: 'GUIDEHB', name: 'HBO GUIDE', num: '198-1', tv: '2.1' },
+            { code: 'SPCNEWS', name: 'Spectrum News', num: '210-2', tv: '2.2' },
+            { code: 'PAR', name: 'PARAMOUNT', num: '234-2', tv: '2.2' },
+            { code: 'CNBC', name: 'CNBC', num: '242-2', tv: '2.2' },
+            { code: 'HSN', name: 'HSN', num: '250-2', tv: '2.2' },
+            { code: 'TVONE', name: 'TV ONE', num: '258-2', tv: '2.2' },
+            { code: 'ACC', name: 'ACC NETWORK', num: '266-2', tv: '2.2' },
+            { code: 'ESPNU', name: 'ESPNU', num: '274-2', tv: '2.2' },
+            { code: 'TUDN', name: 'TUDN', num: '282-2', tv: '2.2' },
+            { code: 'HBO', name: 'HBO', num: '298-2', tv: '2.2' },
+            { code: 'VH1', name: 'VH1', num: '334-3', tv: '2.3' },
+            { code: 'FBN', name: 'FOX BUSINESS NETWORK', num: '342-3', tv: '2.3' },
+            { code: 'EWTN', name: 'EWTN', num: '350-3', tv: '2.3' },
+            { code: 'BBCWLD', name: 'BBC WORLD NEWS', num: '358-3', tv: '2.3' },
+            { code: 'FXDEP', name: 'FOX DEPORTES', num: '374-3', tv: '2.3' },
+            { code: 'WILLOW', name: 'WILLOW CRICKET', num: '382-3', tv: '2.3' },
+            { code: 'HBO2', name: 'HBO 2', num: '398-3', tv: '2.3' },
+            { code: 'HBOSIG', name: 'HBO SIGNATURE', num: '498-4', tv: '2.4' },
+            { code: 'ABC', name: 'WCPO ABC', num: '11-1', tv: '3.1' },
+            { code: 'MTV', name: 'MTV', num: '135-1', tv: '3.1' },
+            { code: 'BLOOM', name: 'BLOOMBERG', num: '143-1', tv: '3.1' },
+            { code: 'SHOPHQ', name: 'SHOP HQ', num: '151-1', tv: '3.1' },
+            { code: 'NIKTON', name: 'NICKTOONS', num: '159-1', tv: '3.1' },
+            { code: 'HBOC', name: 'HBO COMEDY', num: '199-1', tv: '3.1' },
+            { code: 'ABC2', name: 'WCPO 2 Court TV', num: '11-2', tv: '3.2' },
+            { code: 'TVLAND', name: 'TV LAND', num: '235-2', tv: '3.2' },
+            { code: 'WEATH', name: 'WEATHER CHANNEL', num: '243-2', tv: '3.2' },
+            { code: 'QVC', name: 'QVC', num: '251-2', tv: '3.2' },
+            { code: 'TNCK', name: 'TEENNICK', num: '259-2', tv: '3.2' },
+            { code: 'HBOF', name: 'HBO FAMILY', num: '299-2', tv: '3.2' },
+            { code: 'FREEFORM', name: 'FREEFORM', num: '335-3', tv: '3.3' },
+            { code: 'CSPAN', name: 'C-SPAN', num: '343-3', tv: '3.3' },
+            { code: 'CNNE', name: 'CNN EN ESPANOL', num: '351-3', tv: '3.3' },
+            { code: 'HBOLAT', name: 'HBO LATINO', num: '399-3', tv: '3.3' },
+            { code: 'HBOZ', name: 'HBO ZONE', num: '499-4', tv: '3.4' },
+            { code: 'CBS', name: 'WKRC CBS', num: '611-6', tv: '3.6' },
+            { code: 'FOX', name: 'WXIX FOX', num: '12-1', tv: '4.1' },
+            { code: 'RSN', name: 'BALLY Sports Ohio', num: '128-1', tv: '4.1' },
+            { code: 'HALL', name: 'HALLMARK CHANNEL', num: '136-1', tv: '4.1' },
+            { code: 'DISN', name: 'DISNEY CHANNEL', num: '144-1', tv: '4.1' },
+            { code: 'NEWSNTN', name: 'NewsNation', num: '152-1', tv: '4.1' },
+            { code: 'MTVLIVE', name: 'MTV LIVE', num: '160-1', tv: '4.1' },
+            { code: 'FOX2', name: 'WXIX 2 Bounce TV', num: '12-2', tv: '4.2' },
+            { code: 'RSNOHIOP', name: 'Bally Sports Ohio Plus', num: '28-2', tv: '4.2' },
+            { code: 'NGC', name: 'NATIONAL GEOGRAPHIC', num: '136-2', tv: '4.2' },
+            { code: 'BOOM', name: 'BOOMERANG', num: '244-2', tv: '4.2' },
+            { code: 'MTV2', name: 'MTV2', num: '252-2', tv: '4.2' },
+            { code: 'RVLT', name: 'REVOLT', num: '260-2', tv: '4.2' },
+            { code: 'GOLF', name: 'GOLF CHANNEL', num: '276-2', tv: '4.2' },
+            { code: 'RSNSOUTH', name: 'Bally Sports South', num: '28-3', tv: '4.3' },
+            { code: 'APL', name: 'ANIMAL PLANET', num: '336-3', tv: '4.3' },
+            { code: 'DISNEYJR', name: 'DISNEY JR', num: '344-3', tv: '4.3' },
+            { code: 'MTVCLAS', name: 'MTV CLASSIC ROCK', num: '352-3', tv: '4.3' },
+            { code: 'FUSE', name: 'FUSE', num: '360-3', tv: '4.3' },
+            { code: 'MLBN', name: 'MLB NETWORK', num: '376-3', tv: '4.3' },
+            { code: 'NBC', name: 'WLWT NBC', num: '612-6', tv: '4.6' },
+            { code: 'CW2', name: 'WKRC 2 CW', num: '13-1', tv: '5.1' },
+            { code: 'SCIENCE', name: 'SCIENCE', num: '137-1', tv: '5.1' },
+            { code: 'UKIDS', name: 'UNIVERSAL KIDS', num: '145-1', tv: '5.1' },
+            { code: 'UP', name: 'UP', num: '153-1', tv: '5.1' },
+            { code: 'INSP', name: 'INSP', num: '161-1', tv: '5.1' },
+            { code: 'GUIDESP', name: 'SPORTS PASS GUIDE', num: '169-1', tv: '5.1' },
+            { code: 'MLBNSZ', name: 'MLB STRIKE ZONE', num: '177-1', tv: '5.1' },
+            { code: 'AHC', name: 'AHC', num: '237-2', tv: '5.2' },
+            { code: 'NICKJR', name: 'NICK JR', num: '245-2', tv: '5.2' },
+            { code: 'NETGEN', name: 'NETGEN WILD', num: '253-2', tv: '5.2' },
+            { code: 'SUNDANC', name: 'SUNDANCETV', num: '261-2', tv: '5.2' },
+            { code: 'BEIN', name: 'BEIN SPORTS', num: '269-2', tv: '5.2' },
+            { code: 'NBATV', name: 'NBA TV', num: '277-2', tv: '5.2' },
+            { code: 'HGTV', name: 'HGTV', num: '337-3', tv: '5.3' },
+            { code: 'NICK', name: 'NICKELODEON', num: '345-3', tv: '5.3' },
+            { code: 'RFDHD', name: 'RFDTV', num: '353-3', tv: '5.3' },
+            { code: 'NFLNET', name: 'NFL NETWORK', num: '377-3', tv: '5.3' },
+            { code: 'PBS2', name: 'WCET 2 PBS Create', num: '713-7', tv: '5.7' },
+            { code: 'GUIDECI', name: 'CINEMAX GUIDE', num: '114-1', tv: '6.1' },
+            { code: 'GUIDED1', name: 'DELUXE GUIDE 1', num: '130-1', tv: '6.1' },
+            { code: 'FOOD', name: 'FOOD NETWORK', num: '138-1', tv: '6.1' },
+            { code: 'TOON', name: 'CARTOON NETWORK', num: '146-1', tv: '6.1' },
+            { code: 'VICE', name: 'VICELAND', num: '154-1', tv: '6.1' },
+            { code: 'CBSSN', name: 'CBS SPORTS NETWORK', num: '170-1', tv: '6.1' },
+            { code: 'NFLNRZ', name: 'NFL REDZONE', num: '178-1', tv: '6.1' },
+            { code: 'USA', name: 'USA Network', num: '230-2', tv: '6.2' },
+            { code: 'TRAV', name: 'TRAVEL CHANNEL', num: '238-2', tv: '6.2' },
+            { code: 'DFC', name: 'DISCOVERY FAMILY', num: '246-2', tv: '6.2' },
+            { code: 'FYI', name: 'FYI', num: '254-2', tv: '6.2' },
+            { code: 'LMN', name: 'LMN', num: '262-2', tv: '6.2' },
+            { code: 'NHLNET', name: 'NHL NETWORK', num: '278-2', tv: '6.2' },
+            { code: 'AETV', name: 'AE', num: '330-3', tv: '6.3' },
+            { code: 'TLC', name: 'TLC', num: '338-3', tv: '6.3' },
+            { code: 'CMT', name: 'CMT', num: '346-3', tv: '6.3' },
+            { code: 'DEST', name: 'DESTINATION AMERICA', num: '354-3', tv: '6.3' },
+            { code: 'IFC', name: 'IFC', num: '362-3', tv: '6.3' },
+            { code: 'COWBOY', name: 'THE COWBOY CHANNEL', num: '378-3', tv: '6.3' },
+            { code: 'TXMAX', name: 'CINEMAX THRILLERMAX', num: '15-1', tv: '7.1' },
+            { code: 'ION', name: 'ION Television', num: '23-1', tv: '7.1' },
+            { code: 'TNT', name: 'TNT', num: '131-1', tv: '7.1' },
+            { code: 'BRAVO', name: 'BRAVO', num: '139-1', tv: '7.1' },
+            { code: 'GACF', name: 'GAC Family', num: '147-1', tv: '7.1' },
+            { code: 'ID', name: 'INVESTIGATION DISCOVERY', num: '155-1', tv: '7.1' },
+            { code: 'HMM', name: 'HALLMARK MOVIES & MYSTERIES', num: '163-1', tv: '7.1' },
+            { code: 'OUTD', name: 'OUTDOOR CHANNEL', num: '179-1', tv: '7.1' },
+            { code: '5MAX', name: 'CINEMAX 5 STARMAX', num: '15-2', tv: '7.2' },
+            { code: 'METV', name: 'WLWT 2 MeTV', num: '23-2', tv: '7.2' },
+            { code: 'TBS', name: 'TBS', num: '231-2', tv: '7.2' },
+            { code: 'E!', name: 'E!', num: '239-2', tv: '7.2' },
+            { code: 'ESPN', name: 'ESPN', num: '247-2', tv: '7.2' },
+            { code: 'ACUWTHR', name: 'ACCU WEATHER', num: '255-2', tv: '7.2' },
+            { code: 'BETSOUL', name: 'BET SOUL', num: '263-2', tv: '7.2' },
+            { code: 'MOVIE', name: 'CINEMAX MOVIEMAX', num: '15-3', tv: '7.3' },
+            { code: 'MYNET', name: 'WSTR MyTV', num: '23-3', tv: '7.3' },
+            { code: 'AMC', name: 'AMC', num: '331-3', tv: '7.3' },
+            { code: 'LIFE', name: 'LIFETIME', num: '339-3', tv: '7.3' },
+            { code: 'ESPN2', name: 'ESPN2', num: '347-3', tv: '7.3' },
+            { code: 'COOK', name: 'COOKING CHANNEL', num: '355-3', tv: '7.3' },
+            { code: 'OMAX', name: 'CINEMAX OUTERMAX', num: '15-4', tv: '7.4' },
+        ];
 
-        // Switch Language
         function switchLanguage(lang) {
             currentLanguage = lang;
             localStorage.setItem('guestLanguage', lang);
@@ -1075,7 +1093,6 @@
             updateButtonStates();
         }
 
-        // Update Page Language
         function updatePageLanguage() {
             document.querySelectorAll('[data-en][data-es]').forEach(element => {
                 const text = element.getAttribute('data-' + currentLanguage);
@@ -1095,13 +1112,11 @@
             renderChannels(channels);
         }
 
-        // Update Button States
         function updateButtonStates() {
             document.getElementById('btnEn').classList.toggle('active', currentLanguage === 'en');
             document.getElementById('btnEs').classList.toggle('active', currentLanguage === 'es');
         }
 
-        // Show Section
         function showSection(sectionId) {
             document.querySelectorAll('.page-section').forEach(section => {
                 section.classList.remove('active');
@@ -1110,7 +1125,6 @@
             window.scrollTo(0, 0);
         }
 
-        // Render Channels
         function renderChannels(channelsToRender) {
             const grid = document.getElementById('channelsGrid');
             grid.innerHTML = '';
@@ -1138,7 +1152,6 @@
             document.getElementById('channelCount').textContent = channelsToRender.length;
         }
 
-        // Filter Channels
         function filterChannels() {
             const searchTerm = document.getElementById('channelSearch').value.toLowerCase();
 
@@ -1157,7 +1170,6 @@
             renderChannels(filtered);
         }
 
-        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             updateButtonStates();
             renderChannels(channels);
